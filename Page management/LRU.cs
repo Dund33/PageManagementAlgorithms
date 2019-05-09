@@ -40,7 +40,7 @@ namespace Page_management
             }
             memoryPages.Remove(last);
             diskPages.Add(last);
-            Console.WriteLine("Removing page: " + last.ID);
+            //Console.WriteLine("Removing page: " + last.ID);
         }
 
         public override int Run()

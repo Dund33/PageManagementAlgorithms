@@ -24,7 +24,7 @@ namespace Page_management
             }
             memoryPages.Remove(oldest);
             diskPages.Add(oldest);
-            Console.WriteLine("Removing page: "+oldest.ID);
+            //Console.WriteLine("Removing page: "+oldest.ID);
         }
 
         public override int Run()

@@ -42,21 +42,20 @@ namespace Page_management
 
         protected void LoadPage(int id)
         {
-            List<Page> pagesToRemove = new List<Page>();
+            Page foundPage = null;
             foreach(Page page in diskPages)
             {
                 if (page.ID == id)
                 {
-                    pagesToRemove.Add(page);
+                    foundPage = page;
                     memoryPages.Add(page);
-                    Console.WriteLine("Loaded page "+page.ID);
+                    //Console.WriteLine("Loaded page "+page.ID);
                 }
             }
 
-            foreach(Page page in pagesToRemove)
-            {
-                diskPages.Remove(page);
-            }
+          
+           diskPages.Remove(foundPage);
+            
         }
 
         protected void MakePagesOlder()

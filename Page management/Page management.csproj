@@ -55,10 +55,12 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="LRU.cs" />
+    <Compile Include="Opt.cs" />
     <Compile Include="Page.cs" />
     <Compile Include="PageController.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RandomA.cs" />
     <Compile Include="Request.cs" />
     <Compile Include="RequestGenerator.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

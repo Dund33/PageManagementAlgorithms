@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Page_management
 {
-    class ALRU : PageController
+    class RandomA : PageController
     {
 
-        public ALRU(List<Page> diskPages, List<Request> requests, int memorySize)
+        public RandomA(List<Page> diskPages, List<Request> requests, int memorySize)
             : base(diskPages, requests, memorySize)
         { }
 
@@ -36,28 +36,11 @@ namespace Page_management
 
         protected override void Remove()
         {
-            Page toRemove = null;
-
-            for (int i = 0; i < memoryPages.Count; i++)
-            {
-                if (memoryPages[i].GotAChance)
-                {
-                    toRemove = memoryPages[i];
-                    break;
-                }
-                else
-                {
-                    memoryPages[i].GotAChance = true;
-                }
-            }
-
-            if (toRemove == null) Remove();
-            else
-            { 
-                memoryPages.Remove(toRemove);
-                diskPages.Add(toRemove);
-               // Console.WriteLine("Removing page: " + toRemove.ID);
-            }
+            Random random = new Random();
+            int toRemove = random.Next(0, memoryPages.Count);
+            Page page = memoryPages[toRemove];
+            memoryPages.Remove(page);
+            diskPages.Add(page);
         }
     }
 }
