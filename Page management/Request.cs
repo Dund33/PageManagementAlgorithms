@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Page_management
 {
-    class Request
+    class Request : ICloneable
     {
         public int PageID { get; }
         public int Time { get; }
@@ -15,6 +15,11 @@ namespace Page_management
         {
             PageID = pageID;
             Time = time;
+        }
+
+        public object Clone()
+        {
+            return new Request(PageID, Time);
         }
     }
 }

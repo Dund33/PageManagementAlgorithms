@@ -12,7 +12,7 @@ namespace Page_management
             :base(diskPages, requests, memorySize)
         {}
 
-        private void RemoveOldestPage()
+        protected override void Remove()
         {
             Page oldest = memoryPages[0];
             foreach(Page page in memoryPages)
@@ -27,37 +27,24 @@ namespace Page_management
             Console.WriteLine("Removing page: "+oldest.ID);
         }
 
-        public override void Run()
+        public override int Run()
         {
-            List<Request> requestsToRemove = new List<Request>();
-            while (requests.Count > 0)
+            UpdateRequests();
+
+            while(requests.Count>0 || requestPool.Count > 0)
             {
-                requestsToRemove = new List<Request>();
-                foreach (Request request in requests)
+                UpdateRequests();
+                if (requests.Count > 0)
                 {
-                    if (request.Time <= t)
-                    {
-                        Page page = GetPage(request.PageID);
-                        if (page == null)
-                        { 
-                            if (memoryPages.Count > memorySize)
-                            {
-                                RemoveOldestPage();
-                            }
-                        
-                            LoadPage(request.PageID);
-                        }
-
-                        requestsToRemove.Add(request);
-                    }
-                    MakePagesOlder();
+                    GetPage(requests[0].PageID);
+                    requests.Remove(requests[0]);
                 }
-
-                foreach(Request request in requestsToRemove) {
-                    requests.Remove(request);
-                }
+                MakePagesOlder();
                 t++;
             }
+            return pageFaults;
         }
+
+        
     }
 }
