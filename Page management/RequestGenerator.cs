@@ -14,12 +14,12 @@ namespace Page_management
         private int lowerBoundTime;
         private int higherBoundTime;
 
-        public RequestGenerator(int lb, int hb, int lbT, int hbT)
+        public RequestGenerator(int pageLowerBound, int pageUpperBound, int timeLowerBound, int timeUpperBound)
         {
-            lowerBoundID = lb;
-            higherBoundID = hb;
-            lowerBoundTime = lbT;
-            higherBoundTime = hbT;
+            lowerBoundID = pageLowerBound;
+            higherBoundID = pageUpperBound;
+            lowerBoundTime = timeLowerBound;
+            higherBoundTime = timeUpperBound;
         }
 
         public List<Request> Generate(int n)

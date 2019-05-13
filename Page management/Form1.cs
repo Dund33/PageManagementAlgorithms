@@ -16,9 +16,9 @@ namespace Page_management
         {
             InitializeComponent();
 
-            RequestGenerator requestGenerator = new RequestGenerator(0, 100, 0, 100);
-            RequestGenerator requestGenerator2 = new RequestGenerator(200, 250, 0, 100);
-            RequestGenerator requestGenerator3 = new RequestGenerator(450, 650, 50, 1000);
+            RequestGenerator requestGenerator = new RequestGenerator(0, 50, 0, 100);
+            RequestGenerator requestGenerator2 = new RequestGenerator(500, 1000, 10, 100);
+            RequestGenerator requestGenerator3 = new RequestGenerator(2000,2500, 50, 1000);
 
             List<Request> requestsFIFO = requestGenerator.Generate(500);
             requestsFIFO.AddRange(requestGenerator2.Generate(500));
@@ -34,7 +34,7 @@ namespace Page_management
             List<Page> pagesRandomA = new List<Page>();
             List<Page> pagesOPT = new List<Page>();
 
-            for (int i = 0; i <= 650; i++)
+            for (int i = 0; i <= 2500; i++)
             {
                 pagesFIFO.Add(new Page(i));
                 pagesLRU.Add(new Page(i));
@@ -43,11 +43,13 @@ namespace Page_management
                 pagesOPT.Add(new Page(i));
             }
 
-            FIFO fifo = new FIFO(pagesFIFO, requestsFIFO, 64);
-            LRU lru = new LRU(pagesLRU, requestLRU, 64);
-            ALRU alru = new ALRU(pagesALRU, requestALRU, 64);
-            RandomA randomA = new RandomA(pagesRandomA, requestRandomA, 64);
-            Opt opt = new Opt(pagesOPT, requestOpt, 64);
+            int memSize = 20;
+
+            FIFO fifo = new FIFO(pagesFIFO, requestsFIFO, memSize);
+            LRU lru = new LRU(pagesLRU, requestLRU, memSize);
+            ALRU alru = new ALRU(pagesALRU, requestALRU, memSize);
+            RandomA randomA = new RandomA(pagesRandomA, requestRandomA, memSize);
+            OPT opt = new OPT(pagesOPT, requestOpt, memSize);
             int fifoFaults = fifo.Run();
             int lruFaults = lru.Run();
             int alruFaults = alru.Run();
